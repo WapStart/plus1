@@ -37,8 +37,8 @@
 		);
 		
 		private $bannerTypeList = array(
-			'text'		=> 1,
-			'mixed'		=> 2,
+			'text'		=> 2,
+			'mixed'		=> 1,
 			'graphic'	=> 3
 		);
 		
@@ -121,7 +121,7 @@
 		}
 
 		/**
-		 * @return NewPlus1BannerAsker
+		 * @return Plus1BannerAsker
 		 */
 		public static function create()
 		{
@@ -452,6 +452,7 @@
 		private function sendRequest()
 		{
 			$curl = curl_init($this->getUrl());
+
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 			curl_setopt($curl, CURLOPT_HEADER, true);
 
@@ -480,7 +481,7 @@
 					? self::COOKIE_NAME.'='.$_COOKIE[self::COOKIE_NAME]
 					: null
 			);
-			
+
 			$response = curl_exec($curl);
 			
 			if ($response === false) {
@@ -521,7 +522,7 @@
 			return $body;
 		}
 		
-		protected function getUrl()
+		public function getUrl()
 		{
 			if ($this->url)
 				return $this->url;
